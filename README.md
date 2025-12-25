@@ -10,6 +10,7 @@
   - Guest access input form with codename entry
   - Student Gateway authentication page (Login/Register)
   - Quick Access social login (Google, Apple, Instagram) with sci-fi wireframe design
+  - Hall of Fame leaderboard with Elite Trinity podium
   - Cinematic "Dhi Introduction" page with typewriter effects
   - Tactical HUD room interface with video grid and chat console
   - Guest Protocol with mission analysis and neural link
@@ -21,15 +22,16 @@
 - **GitHub Repository**: https://github.com/ranaadhyu-stack/dhirise_streaming
 - **Development**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai
 - **Uplink Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/uplink
+- **Leaderboard Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/leaderboard
 - **Intro Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/intro?user=Agent47
 - **Room Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/room?user=Agent47&subject=AI
 - **Local**: http://localhost:3000
 
 ## Current Status
-- **Version**: v9 (Social Login Added)
+- **Version**: v10 (Hall of Fame Leaderboard Added)
 - **Last Updated**: 2025-12-25
-- **Status**: ✅ All core features working + Social authentication
-- **Cache Version**: v8 (use Ctrl+Shift+R for hard refresh)
+- **Status**: ✅ All core features working + Social authentication + Leaderboard
+- **Cache Version**: v9 (use Ctrl+Shift+R for hard refresh)
 
 ## Tech Stack
 - **Backend**: Hono (Lightweight web framework)
@@ -128,7 +130,38 @@
 - Hover state: `border-cyan-500/60` with cyan glow effect
 - Matches overall sci-fi theme perfectly
 
-### 3. Intro Page (`/intro`)
+### 3. Leaderboard Page (`/leaderboard`) - **NEW!**
+**Hall of Fame - Elite Trinity & Operative Log**
+- Cyberpunk high score theme
+- Starfield background with cyber grid
+- Back to Home button (top-left)
+
+**Elite Trinity Podium (Top 3):**
+- Strategic positioning: Rank 2 (Left), Rank 1 (Center), Rank 3 (Right)
+- **Rank 1 (Gold - LARGEST):**
+  - Floating gold crown above avatar
+  - Border: `border-yellow-500` with golden glow
+  - Scale: 110% (largest card)
+  - Title: "MASTER OPERATIVE"
+  - Shadow: `shadow-[0_0_40px_rgba(234,179,8,0.4)]`
+- **Rank 2 (Platinum - Cyan):**
+  - Border: `border-cyan-400` with cyan glow
+  - Title: "ELITE OPERATIVE"
+  - Shadow: `shadow-[0_0_30px_rgba(34,211,238,0.3)]`
+- **Rank 3 (Bronze - Orange):**
+  - Border: `border-orange-600` with orange glow
+  - Title: "SENIOR OPERATIVE"
+  - Shadow: `shadow-[0_0_30px_rgba(234,88,12,0.3)]`
+- **Floating Animation:** Continuous up/down motion (3s cycle, staggered)
+
+**Operative Log (Ranks 4-20):**
+- Scrollable glass list (max height: 600px)
+- Each row: Rank, Avatar, Username, Hours, DHI Coins
+- Hover effect: Background lightens, username glows cyan
+- 17 operatives with Indian student names
+- Mock data: Hours (145-342) and Coins (4,400-10,500 DHI)
+
+### 4. Intro Page (`/intro`)
 - Cinematic typewriter sequence (5 phases)
 - Dhi introduction: "I AM DHI. YOUR WATCHDOG."
 - Mission input field
@@ -138,7 +171,7 @@
   - "INITIATE NEURAL LINK" button (pulsing)
 - **Redirects to**: `/room?user=CodeName&subject=Subject`
 
-### 4. Room Page (`/room`)
+### 5. Room Page (`/room`)
 **HUD Header:**
 - Mission name (from URL param)
 - Countdown timer: 59:59 (blinking orange)
@@ -169,6 +202,12 @@
 ✅ **Different success flows for social vs traditional login**
 ✅ **72-hour verification alert for social login**
 ✅ **Mock verification system with loading and success states**
+✅ **Hall of Fame leaderboard page with Elite Trinity podium**
+✅ **Floating animated podium cards (Gold/Cyan/Bronze)**
+✅ **Gold crown for Rank 1 (MASTER OPERATIVE)**
+✅ **Scrollable operative log (ranks 4-20)**
+✅ **Indian student names in leaderboard data**
+✅ **Back to Home button with navigation**
 ✅ Cinematic Dhi introduction page with typewriter effect
 ✅ Guest Protocol sequence with mission analysis
 ✅ Guest Warning alert box (orange dashed border)
@@ -186,7 +225,7 @@
 ✅ Mobile-responsive design (stacks on small screens)
 ✅ Tailwind CSS integration
 ✅ React 19 with hooks (useState, useEffect, useRef)
-✅ Cache-busting for static files (v8)
+✅ Cache-busting for static files (v9)
 
 ## Features Not Yet Implemented
 ❌ Video/Audio streaming (WebRTC)
@@ -324,7 +363,20 @@ Neural Link Initiated: { codename: "Agent47", subject: "Physics" }
 - Tested on Chrome, Firefox, Safari, Edge
 - Mobile-responsive (iOS Safari, Chrome Mobile)
 
-## Latest Updates (v9)
+## Latest Updates (v10)
+- ✅ **Added Hall of Fame Leaderboard** (`/leaderboard`)
+- ✅ **Elite Trinity Podium** with top 3 operatives (Gold/Cyan/Bronze)
+- ✅ **Rank 1 features gold crown** floating above avatar
+- ✅ **Floating animation** for all podium cards (3s cycle, staggered)
+- ✅ **Strategic positioning** (Rank 2 left, Rank 1 center largest, Rank 3 right)
+- ✅ **Operative Log** with scrollable list (ranks 4-20)
+- ✅ **20 Indian student names** with realistic hours and DHI coins
+- ✅ **Glass-morphism design** with unique glows for each rank
+- ✅ **Back to Home button** with chevron navigation
+- ✅ **Landing page LEADERBOARD link** updated to `/leaderboard`
+- ✅ **Cache updated to v9** for proper button functionality
+
+## Previous Updates (v9)
 - ✅ **Added Quick Access social login** (Google, Apple, Instagram)
 - ✅ **Sci-fi wireframe social buttons** with monochrome cyan aesthetic
 - ✅ **Custom SVG icons** for social providers (no external library dependencies)
