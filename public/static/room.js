@@ -1,6 +1,7 @@
 import { createElement as h, useState, useEffect, useRef } from 'https://esm.sh/react@19.2.3';
 import { createRoot } from 'https://esm.sh/react-dom@19.2.3/client';
 import { motion } from 'https://esm.sh/framer-motion@11.15.0';
+import { ScanFace } from 'https://esm.sh/lucide-react@0.294.0';
 
 function RoomPage() {
   const [codename, setCodename] = useState('UNKNOWN');
@@ -76,6 +77,12 @@ function RoomPage() {
     setMessage('');
   };
 
+  const handleDisengage = () => {
+    if (confirm('DISENGAGE NEURAL LINK?\n\nThis will terminate your session.')) {
+      window.location.href = '/';
+    }
+  };
+
   return h(
     'main',
     {
@@ -128,11 +135,20 @@ function RoomPage() {
           }, h('span', { className: "text-orange-500" }, formatTime(timeLeft)))
         ),
 
-        // Right: Wallet
+        // Right: Wallet + Exit Button
         h('div', {
-          className: "border-2 border-cyan-500/50 px-4 py-2 rounded bg-cyan-500/5 hover:bg-cyan-500/10 transition-colors"
+          className: "flex items-center gap-4"
         },
-          h('span', { className: "text-cyan-400 font-mono text-sm md:text-base tracking-wider" }, '[ WALLET: 540 DHI ]')
+          h('div', {
+            className: "border-2 border-cyan-500/50 px-4 py-2 rounded bg-cyan-500/5 hover:bg-cyan-500/10 transition-colors"
+          },
+            h('span', { className: "text-cyan-400 font-mono text-sm md:text-base tracking-wider" }, '[ WALLET: 540 DHI ]')
+          ),
+          // Exit Button
+          h('button', {
+            onClick: handleDisengage,
+            className: "border-2 border-red-500/50 px-4 py-2 rounded bg-red-500/5 hover:bg-red-500/10 text-red-500 font-mono text-sm md:text-base tracking-wider transition-all hover:shadow-[0_0_10px_rgba(239,68,68,0.3)]"
+          }, '[ DISENGAGE // ]')
         )
       ),
 
@@ -147,7 +163,7 @@ function RoomPage() {
           h('div', {
             className: "grid grid-cols-1 md:grid-cols-2 gap-4 h-full"
           },
-            // Me Box (Top-Left)
+            // Me Box (Top-Left) - UPGRADED
             h(motion.div, {
               initial: { opacity: 0, scale: 0.9 },
               animate: { opacity: 1, scale: 1 },
@@ -156,10 +172,21 @@ function RoomPage() {
               h('div', {
                 className: "relative aspect-video bg-gradient-to-br from-cyan-950/40 to-black border-2 border-cyan-400 rounded-lg shadow-[0_0_20px_rgba(34,211,238,0.3)] overflow-hidden"
               },
-                // Video placeholder
+                // ScanFace Icon with Pulse Animation
                 h('div', {
-                  className: "absolute inset-0 flex items-center justify-center text-cyan-400/50 text-6xl"
-                }, '👤'),
+                  className: "absolute inset-0 flex items-center justify-center"
+                },
+                  h(motion.div, {
+                    animate: { opacity: [0.5, 1, 0.5] },
+                    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                  },
+                    h(ScanFace, {
+                      size: 120,
+                      className: "text-cyan-400",
+                      strokeWidth: 1.5
+                    })
+                  )
+                ),
                 
                 // Label
                 h('div', {
@@ -180,7 +207,7 @@ function RoomPage() {
               )
             ),
 
-            // Peer Box 1 (Top-Right)
+            // Peer Box 1 (Top-Right) - UPGRADED WITH RADAR SCAN
             h(motion.div, {
               animate: { 
                 opacity: [0.3, 0.5, 0.3],
@@ -199,6 +226,17 @@ function RoomPage() {
                   }
                 }),
                 
+                // Radar Scan Effect
+                h(motion.div, {
+                  className: "absolute inset-0",
+                  animate: { y: ['0%', '100%', '0%'] },
+                  transition: { duration: 4, repeat: Infinity, ease: "linear" }
+                },
+                  h('div', {
+                    className: "w-full h-8 bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent"
+                  })
+                ),
+                
                 // Label
                 h('div', {
                   className: "absolute top-2 left-2 bg-gray-800/80 px-3 py-1 rounded text-xs font-mono tracking-wider text-gray-400 border border-white/20"
@@ -206,7 +244,7 @@ function RoomPage() {
               )
             ),
 
-            // Peer Box 2 (Bottom-Left)
+            // Peer Box 2 (Bottom-Left) - UPGRADED WITH RADAR SCAN
             h(motion.div, {
               animate: { 
                 opacity: [0.3, 0.5, 0.3],
@@ -223,13 +261,25 @@ function RoomPage() {
                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)'
                   }
                 }),
+                
+                // Radar Scan Effect
+                h(motion.div, {
+                  className: "absolute inset-0",
+                  animate: { y: ['0%', '100%', '0%'] },
+                  transition: { duration: 4.5, repeat: Infinity, ease: "linear" }
+                },
+                  h('div', {
+                    className: "w-full h-8 bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent"
+                  })
+                ),
+                
                 h('div', {
                   className: "absolute top-2 left-2 bg-gray-800/80 px-3 py-1 rounded text-xs font-mono tracking-wider text-gray-400 border border-white/20"
                 }, '[ SEARCHING SIGNAL... ]')
               )
             ),
 
-            // Peer Box 3 (Bottom-Right)
+            // Peer Box 3 (Bottom-Right) - UPGRADED WITH RADAR SCAN
             h(motion.div, {
               animate: { 
                 opacity: [0.3, 0.5, 0.3],
@@ -246,6 +296,18 @@ function RoomPage() {
                     backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)'
                   }
                 }),
+                
+                // Radar Scan Effect
+                h(motion.div, {
+                  className: "absolute inset-0",
+                  animate: { y: ['0%', '100%', '0%'] },
+                  transition: { duration: 5, repeat: Infinity, ease: "linear" }
+                },
+                  h('div', {
+                    className: "w-full h-8 bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent"
+                  })
+                ),
+                
                 h('div', {
                   className: "absolute top-2 left-2 bg-gray-800/80 px-3 py-1 rounded text-xs font-mono tracking-wider text-gray-400 border border-white/20"
                 }, '[ SEARCHING SIGNAL... ]')
@@ -286,41 +348,40 @@ function RoomPage() {
             h('div', { ref: chatEndRef })
           ),
 
-          // Input Area
+          // Input Area - UPGRADED
           h('div', {
-            className: "border-t border-cyan-500/30 p-4 space-y-3"
+            className: "border-t border-cyan-500/30 p-4"
           },
-            // Ask Dhi Toggle
-            h('div', {
-              className: "flex items-center gap-2 mb-2"
-            },
+            // Input Form with Toggle Inside
+            h('form', { onSubmit: handleSendMessage, className: "flex gap-2" },
+              // Ask Dhi Toggle Button (Inside Input Area)
               h('button', {
+                type: "button",
                 onClick: () => setAskDhiMode(!askDhiMode),
-                className: `px-3 py-1 rounded text-xs font-mono tracking-wider transition-all ${
+                className: `flex-shrink-0 px-3 py-2 rounded text-xs font-mono tracking-wider transition-all ${
                   askDhiMode 
                     ? 'bg-cyan-500/30 border-2 border-cyan-400 text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.4)]' 
-                    : 'bg-gray-800/50 border border-gray-600 text-gray-400'
+                    : 'bg-gray-800/50 border border-gray-600 text-gray-400 hover:text-gray-300'
                 }`
-              }, askDhiMode ? '✓ ASK DHI MODE' : 'ASK DHI'),
-              askDhiMode && h('span', { className: "text-cyan-400 text-xs font-mono animate-pulse" }, '← DHI LISTENING')
-            ),
-
-            // Input Form
-            h('form', { onSubmit: handleSendMessage, className: "flex gap-2" },
+              }, askDhiMode ? '✓ DHI' : 'DHI'),
+              
+              // Input Field
               h('input', {
                 type: "text",
                 value: message,
                 onChange: (e) => setMessage(e.target.value),
-                placeholder: "> Enter command...",
-                className: `flex-1 bg-transparent border ${
+                placeholder: askDhiMode ? "> Ask Dhi..." : "> Enter command...",
+                className: `flex-1 bg-transparent rounded px-3 py-2 text-white placeholder-gray-500 font-mono text-sm outline-none transition-all ${
                   askDhiMode 
-                    ? 'border-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.3)]' 
-                    : 'border-gray-600'
-                } rounded px-3 py-2 text-white placeholder-gray-500 font-mono text-sm outline-none focus:border-cyan-400 transition-all`
+                    ? 'border-2 border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.3)]' 
+                    : 'border border-gray-600 focus:border-cyan-400'
+                }`
               }),
+              
+              // Send Button
               h('button', {
                 type: "submit",
-                className: "bg-cyan-500/20 hover:bg-cyan-500/40 border border-cyan-500 text-cyan-300 px-4 py-2 rounded font-mono text-sm transition-colors"
+                className: "flex-shrink-0 bg-cyan-500/20 hover:bg-cyan-500/40 border border-cyan-500 text-cyan-300 px-4 py-2 rounded font-mono text-sm transition-colors"
               }, 'SEND')
             )
           )
