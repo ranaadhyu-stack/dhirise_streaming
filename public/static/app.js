@@ -84,7 +84,7 @@ function App() {
       className: "absolute top-0 right-0 p-8 z-20 flex gap-8 font-mono text-xs tracking-[0.2em] text-cyan-400/80"
     },
       h('a', { href: "#whoarewe", className: "hover:text-white transition-colors duration-200" }, "[ WHO ARE WE ]"),
-      h('a', { href: "#contact", className: "hover:text-white transition-colors duration-200" }, "[ CONTACT US ]"),
+      h('a', { href: "/contact", className: "hover:text-white transition-colors duration-200" }, "[ CONTACT US ]"),
       h('a', { href: "#livemap", className: "hover:text-white transition-colors duration-200" }, "[ LIVE MAP ]"),
       h('a', { href: "/leaderboard", className: "hover:text-white transition-colors duration-200" }, "[ LEADERBOARD ]"),
       h('a', { 
