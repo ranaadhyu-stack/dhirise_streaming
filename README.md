@@ -9,6 +9,7 @@
   - Live statistics display (Operatives, Active Rooms, Sessions)
   - Guest access input form with codename entry
   - Student Gateway authentication page (Login/Register)
+  - Quick Access social login (Google, Apple, Instagram) with sci-fi wireframe design
   - Cinematic "Dhi Introduction" page with typewriter effects
   - Tactical HUD room interface with video grid and chat console
   - Guest Protocol with mission analysis and neural link
@@ -25,9 +26,9 @@
 - **Local**: http://localhost:3000
 
 ## Current Status
-- **Version**: v8 (Stable with Authentication)
+- **Version**: v9 (Social Login Added)
 - **Last Updated**: 2025-12-25
-- **Status**: ✅ All core features working
+- **Status**: ✅ All core features working + Social authentication
 - **Cache Version**: v8 (use Ctrl+Shift+R for hard refresh)
 
 ## Tech Stack
@@ -52,7 +53,7 @@
 3. **Intro Page** - Cinematic introduction → Enter mission subject
 4. **Redirects to** `/room?user=CodeName&subject=Subject`
 
-### Flow 2: Student Authentication
+### Flow 2: Student Authentication (Traditional)
 1. **Landing Page** (`/`) - User clicks "UPLINK //" button
 2. **Uplink Page** (`/uplink`) - Student Gateway authentication:
    - **Register Tab**: Create new account with username, email, password
@@ -60,6 +61,18 @@
 3. **After Registration**: Verification screen → "RETURN TO HOME"
 4. **After Login**: Redirects to `/intro?user=Username`
 5. **Continue to Room**: Same as guest flow
+
+### Flow 3: Social Login (Quick Access)
+1. **Landing Page** (`/`) - User clicks "UPLINK //" button
+2. **Uplink Page** (`/uplink`) - Choose Quick Access:
+   - Click Google, Apple, or Instagram button
+3. **Loading**: "AUTHENTICATING VIA SOCIAL NETWORK..." (2s)
+4. **Success Screen**: 
+   - "SYSTEM ACCESS GRANTED"
+   - Alert: "Verify student status within 72 HOURS"
+   - Click [ ENTER DHIVERSE ]
+5. **Redirects to**: `/intro?user=SocialUser`
+6. **Continue to Room**: Same as other flows
 
 ## Page Details
 
@@ -76,11 +89,14 @@
 - Glass-morphism centered panel with cyan TechBorder corners
 - Tab switcher: [ LOG IN ] | [ REGISTER ]
 - Smooth Framer Motion transitions
+- **Quick Access social login** (Google, Apple, Instagram)
 
 **Login Tab:**
 - Username input
 - Password input
 - [ ACCESS PORTAL ] button (green glow)
+- **Quick Access divider**: "> OR QUICK ACCESS VIA <"
+- **Social buttons**: Google, Apple, Instagram (sci-fi wireframe style)
 - On submit: Redirects to `/intro?user=Username`
 
 **Register Tab:**
@@ -88,6 +104,8 @@
 - Email ID input
 - Password input (min 8 chars)
 - [ CREATE ACCOUNT ] button (cyan glow)
+- **Quick Access divider**: "> OR QUICK ACCESS VIA <"
+- **Social buttons**: Google, Apple, Instagram (sci-fi wireframe style)
 - On submit: Loading screen → Success screen
 
 **Registration Flow:**
@@ -95,6 +113,20 @@
 2. Success: Green checkmark + "VERIFICATION LINK SENT"
 3. Message: "Please check your Email ID to activate your account"
 4. [ RETURN TO HOME ] button
+
+**Social Login Flow (Google/Apple/Instagram):**
+1. Loading: "> AUTHENTICATING VIA SOCIAL NETWORK..." (2s)
+2. Success: Green checkmark + "SYSTEM ACCESS GRANTED"
+3. Alert: "⚠️ Please verify student status within 72 HOURS"
+4. Warning: "Failure to verify will result in access revocation"
+5. [ ENTER DHIVERSE ] button → Redirects to `/intro?user=SocialUser`
+
+**Social Button Design:**
+- Monochrome cyan wireframe aesthetic (no colorful generic buttons)
+- Custom SVG icons (Google crosshairs, Apple wireframe, Instagram camera)
+- Normal state: `border-cyan-500/30` with transparent background
+- Hover state: `border-cyan-500/60` with cyan glow effect
+- Matches overall sci-fi theme perfectly
 
 ### 3. Intro Page (`/intro`)
 - Cinematic typewriter sequence (5 phases)
@@ -132,6 +164,10 @@
 ✅ **Tab switcher with smooth animations**
 ✅ **Registration form with email verification flow**
 ✅ **Login form with portal access**
+✅ **Quick Access social login (Google, Apple, Instagram)**
+✅ **Sci-fi wireframe social buttons (monochrome cyan aesthetic)**
+✅ **Different success flows for social vs traditional login**
+✅ **72-hour verification alert for social login**
 ✅ **Mock verification system with loading and success states**
 ✅ Cinematic Dhi introduction page with typewriter effect
 ✅ Guest Protocol sequence with mission analysis
@@ -288,7 +324,19 @@ Neural Link Initiated: { codename: "Agent47", subject: "Physics" }
 - Tested on Chrome, Firefox, Safari, Edge
 - Mobile-responsive (iOS Safari, Chrome Mobile)
 
-## Latest Updates (v8)
+## Latest Updates (v9)
+- ✅ **Added Quick Access social login** (Google, Apple, Instagram)
+- ✅ **Sci-fi wireframe social buttons** with monochrome cyan aesthetic
+- ✅ **Custom SVG icons** for social providers (no external library dependencies)
+- ✅ **Different success flows** for social vs traditional authentication
+- ✅ **72-hour verification alert** for social login users
+- ✅ **"ENTER DHIVERSE" button** for immediate access after social login
+- ✅ Social buttons match overall cyberpunk theme perfectly
+- ✅ No colorful generic social buttons - pure wireframe design
+- ✅ Hover effects with cyan glow and subtle background fill
+- ✅ All social login flows properly tested and working
+
+## Previous Updates (v8)
 - ✅ Added Student Gateway authentication page (`/uplink`)
 - ✅ Implemented login/register tab switcher
 - ✅ Created registration form with validation
