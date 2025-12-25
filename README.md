@@ -22,6 +22,12 @@
 - **Room Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/room?user=Agent47&subject=AI
 - **Local**: http://localhost:3000
 
+## Current Status
+- **Version**: v7 (Stable)
+- **Last Updated**: 2025-12-25
+- **Status**: ✅ All core features working
+- **Cache Version**: v7 (use Ctrl+Shift+R for hard refresh)
+
 ## Tech Stack
 - **Backend**: Hono (Lightweight web framework)
 - **Frontend**: React 19 (via ESM CDN)
