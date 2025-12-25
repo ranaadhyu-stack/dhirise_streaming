@@ -13,6 +13,7 @@
   - Real-time countdown timer (currently showing static stats)
 
 ## URLs
+- **GitHub Repository**: https://github.com/ranaadhyu-stack/dhirise_streaming
 - **Development**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai
 - **Local**: http://localhost:3000
 
