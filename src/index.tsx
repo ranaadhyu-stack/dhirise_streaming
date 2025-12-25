@@ -37,4 +37,12 @@ app.get('/uplink', (c) => {
   )
 })
 
+app.get('/leaderboard', (c) => {
+  return c.render(
+    <div id="root">
+      <script type="module" src="/static/leaderboard.js?v=1"></script>
+    </div>
+  )
+})
+
 export default app
