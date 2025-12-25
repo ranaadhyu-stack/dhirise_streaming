@@ -6,7 +6,11 @@ const app = new Hono()
 app.use(renderer)
 
 app.get('/', (c) => {
-  return c.render(<h1>Hello!</h1>)
+  return c.render(
+    <div id="root">
+      <script type="module" src="/static/app.js"></script>
+    </div>
+  )
 })
 
 export default app
