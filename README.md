@@ -11,6 +11,7 @@
   - Student Gateway authentication page (Login/Register)
   - Quick Access social login (Google, Apple, Instagram) with sci-fi wireframe design
   - Hall of Fame leaderboard with Elite Trinity podium
+  - Mission Control contact page with secure transmission interface
   - Cinematic "Dhi Introduction" page with typewriter effects
   - Tactical HUD room interface with video grid and chat console
   - Guest Protocol with mission analysis and neural link
@@ -23,15 +24,16 @@
 - **Development**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai
 - **Uplink Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/uplink
 - **Leaderboard Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/leaderboard
+- **Contact Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/contact
 - **Intro Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/intro?user=Agent47
 - **Room Page**: https://3000-i5lsaotnp60kou4tqc49h-5c13a017.sandbox.novita.ai/room?user=Agent47&subject=AI
 - **Local**: http://localhost:3000
 
 ## Current Status
-- **Version**: v10 (Hall of Fame Leaderboard Added)
+- **Version**: v11 (Mission Control Contact Page Added)
 - **Last Updated**: 2025-12-25
-- **Status**: ✅ All core features working + Social authentication + Leaderboard
-- **Cache Version**: v9 (use Ctrl+Shift+R for hard refresh)
+- **Status**: ✅ All core features working + Contact support interface
+- **Cache Version**: v10 (use Ctrl+Shift+R for hard refresh)
 
 ## Tech Stack
 - **Backend**: Hono (Lightweight web framework)
@@ -161,7 +163,43 @@
 - 17 operatives with Indian student names
 - Mock data: Hours (145-342) and Coins (4,400-10,500 DHI)
 
-### 4. Intro Page (`/intro`)
+### 4. Contact Page (`/contact`) - **NEW!**
+**Mission Control - Secure Transmission Link**
+- 2-column layout (Direct Uplinks + Encrypted Transmission Form)
+- Starfield background with cyber grid
+- Back to Home button (top-left)
+
+**Left Column: Direct Channels**
+- Header: `> DIRECT CHANNELS`
+- **4 Uplink Cards** with hover slide effect:
+  - **WhatsApp** (Green border): "PRIORITY CHAT" - Avg Reply: 5 mins
+  - **Instagram** (Pink border): "COMMUNITY" - Follow Updates
+  - **Email** (Cyan border): "OFFICIAL LOGS" - support@dhirise.com
+  - **Call** (Orange border): "EMERGENCY" - +91-98765-XXXX
+- Hover animation: Slides right (x: 10px)
+- Staggered entry animations (0.1s delay each)
+- Custom SVG icons for each service
+
+**Right Column: Encrypted Transmission Form**
+- Header: `> SUBMIT QUERY LOG`
+- **Trust Indicator** (CRITICAL for reassurance):
+  - Pulsing green dot (●)
+  - Text: "HUMAN OPERATIVES ACTIVE. ESTIMATED REPLY: 24-48 HOURS."
+  - Style: `text-emerald-400, tracking-widest`
+- **Form Fields:**
+  - `> Operative Name` (text input)
+  - `> Comms ID` (email input)
+  - `> Mission Context` (dropdown: Account Issue, Bug Report, Feature Request, Technical Support, Other)
+  - `> Transmission Data` (textarea, 6 rows)
+- **Submit Button:** `[ TRANSMIT DATA ]` with cyan glow and scale hover effect
+
+**Submit Flow:**
+1. Loading: "> ENCRYPTING DATA PACKETS..." (2s with spinner)
+2. Success: "> TRANSMISSION RECEIVED. TICKET #[RANDOM]."
+3. Message: "Stand by, Operative. We are reviewing your log personally."
+4. Button: `[ SUBMIT ANOTHER ]` to reset form
+
+### 5. Intro Page (`/intro`)
 - Cinematic typewriter sequence (5 phases)
 - Dhi introduction: "I AM DHI. YOUR WATCHDOG."
 - Mission input field
@@ -171,7 +209,7 @@
   - "INITIATE NEURAL LINK" button (pulsing)
 - **Redirects to**: `/room?user=CodeName&subject=Subject`
 
-### 5. Room Page (`/room`)
+### 6. Room Page (`/room`)
 **HUD Header:**
 - Mission name (from URL param)
 - Countdown timer: 59:59 (blinking orange)
@@ -208,6 +246,14 @@
 ✅ **Scrollable operative log (ranks 4-20)**
 ✅ **Indian student names in leaderboard data**
 ✅ **Back to Home button with navigation**
+✅ **Mission Control contact page with secure transmission interface**
+✅ **Direct Uplinks cards (WhatsApp, Instagram, Email, Call)**
+✅ **Hover slide effect for uplink cards (x: 10px)**
+✅ **Trust indicator with pulsing green dot**
+✅ **Encrypted transmission form with validation**
+✅ **Mock submission with loading and success states**
+✅ **Random ticket ID generation (1000-9999)**
+✅ **Personal reassurance messaging**
 ✅ Cinematic Dhi introduction page with typewriter effect
 ✅ Guest Protocol sequence with mission analysis
 ✅ Guest Warning alert box (orange dashed border)
