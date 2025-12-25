@@ -4,8 +4,11 @@ import { motion } from 'https://esm.sh/framer-motion@11.15.0';
 
 function IntroPage() {
   const [phase, setPhase] = useState(0);
+  const [step, setStep] = useState('initial'); // initial, analyzing, guest_warning, ready
   const [typedText1, setTypedText1] = useState('');
   const [typedText2, setTypedText2] = useState('');
+  const [analysisText1, setAnalysisText1] = useState('');
+  const [analysisText2, setAnalysisText2] = useState('');
   const [subject, setSubject] = useState('');
   const [codename, setCodename] = useState('');
 
@@ -77,10 +80,56 @@ function IntroPage() {
     }
   }, [phase]);
 
+  // Mission Analysis Typewriter Effect
+  useEffect(() => {
+    if (step === 'analyzing') {
+      const analysis1 = `> SUBJECT IDENTIFIED: ${subject.toUpperCase()}.`;
+      const analysis2 = '> SEARCHING ACTIVE SECTORS...';
+      
+      // Type first analysis line
+      let index = 0;
+      const interval1 = setInterval(() => {
+        if (index <= analysis1.length) {
+          setAnalysisText1(analysis1.slice(0, index));
+          index++;
+        } else {
+          clearInterval(interval1);
+          // Start second line after pause
+          setTimeout(() => {
+            let index2 = 0;
+            const interval2 = setInterval(() => {
+              if (index2 <= analysis2.length) {
+                setAnalysisText2(analysis2.slice(0, index2));
+                index2++;
+              } else {
+                clearInterval(interval2);
+                // Show guest warning after search completes
+                setTimeout(() => {
+                  setStep('guest_warning');
+                }, 1000);
+              }
+            }, 50);
+          }, 500);
+        }
+      }, 50);
+
+      return () => clearInterval(interval1);
+    }
+  }, [step, subject]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Room Requested:', { codename, subject });
-    // Future: Navigate to room matcher
+    if (!subject.trim()) {
+      return;
+    }
+    console.log('Mission Analysis Started:', { codename, subject });
+    setStep('analyzing');
+  };
+
+  const handleNeuralLink = () => {
+    console.log('Neural Link Initiated:', { codename, subject });
+    // TODO: Navigate to /room
+    window.location.href = `/room?user=${encodeURIComponent(codename)}&subject=${encodeURIComponent(subject)}`;
   };
 
   return h(
@@ -159,7 +208,7 @@ function IntroPage() {
         ),
 
         // Phase 4: Mission input
-        phase >= 4 && h(motion.div, {
+        phase >= 4 && step === 'initial' && h(motion.div, {
           key: 'mission-input',
           initial: { opacity: 0, y: 20 },
           animate: { opacity: 1, y: 0 },
@@ -186,6 +235,85 @@ function IntroPage() {
                 type: "submit",
                 className: "text-xs text-cyan-500/60 hover:text-cyan-400 transition-colors tracking-wider mt-2"
               }, '> PRESS ENTER TO CONTINUE')
+            )
+          )
+        ),
+
+        // Step: Analyzing (Input locked, showing analysis)
+        phase >= 4 && (step === 'analyzing' || step === 'guest_warning') && h('div', { className: "mt-16" },
+          // Locked input field
+          h('div', { className: "space-y-4 mb-6" },
+            h('label', { className: "block text-cyan-500/80 text-xs md:text-sm tracking-wider" },
+              '> WHAT IS YOUR MISSION TODAY?'
+            ),
+            h('div', { className: "flex items-center gap-4 border-b border-cyan-500/50 pb-2 opacity-60" },
+              h('span', { className: "text-cyan-500" }, '['),
+              h('input', {
+                type: "text",
+                value: subject,
+                readOnly: true,
+                className: "bg-transparent flex-1 outline-none text-white font-mono cursor-not-allowed"
+              }),
+              h('span', { className: "text-cyan-500" }, ']')
+            )
+          ),
+
+          // Analysis response
+          h(motion.div, {
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+            transition: { duration: 0.5 }
+          },
+            h('div', { className: "space-y-2 text-green-400" },
+              h('div', null, analysisText1),
+              h('div', null, analysisText2)
+            )
+          )
+        ),
+
+        // Step: Guest Warning (System Alert Box)
+        phase >= 4 && step === 'guest_warning' && h(motion.div, {
+          key: 'guest-warning',
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, delay: 0.5 }
+        },
+          h('div', { className: "mt-8 border-2 border-dashed border-orange-500/50 p-6 rounded-lg bg-orange-950/20" },
+            // Warning header
+            h('div', { className: "flex items-center gap-3 mb-4" },
+              h('span', { className: "text-2xl animate-pulse" }, '⚠️'),
+              h('span', { className: "text-orange-400 font-bold tracking-wider text-lg" }, 
+                'UNREGISTERED SIGNATURE DETECTED'
+              )
+            ),
+            
+            // Warning details
+            h('div', { className: "space-y-2 text-orange-400/80 text-sm" },
+              h('div', { className: "flex items-center gap-2" },
+                h('span', { className: "text-orange-500" }, '▸'),
+                h('span', null, 'GUEST PROTOCOL ACTIVE: TIME LIMIT [30:00 MINS]')
+              ),
+              h('div', { className: "flex items-center gap-2" },
+                h('span', { className: "text-orange-500" }, '▸'),
+                h('span', null, 'ACCESS LEVEL: BRONZE (NO EXTENSIONS)')
+              ),
+              h('div', { className: "flex items-center gap-2 mt-4 text-orange-300/60 text-xs" },
+                h('span', null, '⏰ SESSION WILL TERMINATE AUTOMATICALLY')
+              )
+            )
+          ),
+
+          // Neural Link Button
+          h(motion.div, {
+            initial: { opacity: 0, scale: 0.9 },
+            animate: { opacity: 1, scale: 1 },
+            transition: { duration: 0.5, delay: 1 }
+          },
+            h('button', {
+              onClick: handleNeuralLink,
+              className: "mt-8 w-full py-4 border-2 border-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/30 text-cyan-400 font-bold text-lg tracking-widest rounded transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] hover:scale-105"
+            },
+              h('span', { className: "inline-block" }, '[ INITIATE NEURAL LINK ]')
             )
           )
         )
