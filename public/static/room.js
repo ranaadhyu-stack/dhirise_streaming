@@ -1,7 +1,34 @@
 import { createElement as h, useState, useEffect, useRef } from 'https://esm.sh/react@19.2.3';
 import { createRoot } from 'https://esm.sh/react-dom@19.2.3/client';
 import { motion } from 'https://esm.sh/framer-motion@11.15.0';
-import { ScanFace } from 'https://esm.sh/lucide-react@0.294.0';
+
+// Custom ScanFace SVG Component
+function ScanFaceIcon({ size = 120, className = "" }) {
+  return h('svg', {
+    width: size,
+    height: size,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: className
+  },
+    // Face outline
+    h('circle', { cx: "12", cy: "12", r: "10" }),
+    // Eyes
+    h('circle', { cx: "9", cy: "10", r: "1.5" }),
+    h('circle', { cx: "15", cy: "10", r: "1.5" }),
+    // Mouth
+    h('path', { d: "M8 15c1 1 3 2 4 2s3-1 4-2" }),
+    // Scan lines
+    h('line', { x1: "2", y1: "12", x2: "6", y2: "12", strokeWidth: "2" }),
+    h('line', { x1: "18", y1: "12", x2: "22", y2: "12", strokeWidth: "2" }),
+    h('line', { x1: "12", y1: "2", x2: "12", y2: "6", strokeWidth: "2" }),
+    h('line', { x1: "12", y1: "18", x2: "12", y2: "22", strokeWidth: "2" })
+  );
+}
 
 function RoomPage() {
   const [codename, setCodename] = useState('UNKNOWN');
@@ -180,10 +207,9 @@ function RoomPage() {
                     animate: { opacity: [0.5, 1, 0.5] },
                     transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
                   },
-                    h(ScanFace, {
+                    h(ScanFaceIcon, {
                       size: 120,
-                      className: "text-cyan-400",
-                      strokeWidth: 1.5
+                      className: "text-cyan-400"
                     })
                   )
                 ),
