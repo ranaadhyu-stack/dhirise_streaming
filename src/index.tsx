@@ -13,4 +13,12 @@ app.get('/', (c) => {
   )
 })
 
+app.get('/intro', (c) => {
+  return c.render(
+    <div id="root">
+      <script type="module" src="/static/intro.js"></script>
+    </div>
+  )
+})
+
 export default app

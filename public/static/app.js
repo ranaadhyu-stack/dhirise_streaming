@@ -47,9 +47,13 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Email submitted:', email);
-    setEmail('');
-    alert('Access token requested!');
+    if (!email.trim()) {
+      alert('Please enter a codename!');
+      return;
+    }
+    console.log('Codename submitted:', email);
+    // Redirect to intro page with codename as query parameter
+    window.location.href = `/intro?user=${encodeURIComponent(email)}`;
   };
 
   return h('main', {
