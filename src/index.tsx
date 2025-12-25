@@ -8,7 +8,7 @@ app.use(renderer)
 app.get('/', (c) => {
   return c.render(
     <div id="root">
-      <script type="module" src="/static/app.js"></script>
+      <script type="module" src="/static/app.js?v=2"></script>
     </div>
   )
 })
@@ -16,7 +16,7 @@ app.get('/', (c) => {
 app.get('/intro', (c) => {
   return c.render(
     <div id="root">
-      <script type="module" src="/static/intro.js"></script>
+      <script type="module" src="/static/intro.js?v=2"></script>
     </div>
   )
 })
