@@ -304,17 +304,26 @@ function IntroPage() {
           ),
 
           // Neural Link Button
-          h(motion.div, {
+          h(motion.button, {
             initial: { opacity: 0, scale: 0.9 },
-            animate: { opacity: 1, scale: 1 },
-            transition: { duration: 0.5, delay: 1 }
-          },
-            h('button', {
-              onClick: handleNeuralLink,
-              className: "mt-8 w-full py-4 border-2 border-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/30 text-cyan-400 font-bold text-lg tracking-widest rounded transition-all duration-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] hover:scale-105"
+            animate: { 
+              opacity: 1, 
+              scale: [1, 1.02, 1],
+              boxShadow: [
+                '0 0 10px rgba(6,182,212,0.3)',
+                '0 0 25px rgba(6,182,212,0.6)',
+                '0 0 10px rgba(6,182,212,0.3)'
+              ]
             },
-              h('span', { className: "inline-block" }, '[ INITIATE NEURAL LINK ]')
-            )
+            transition: { 
+              opacity: { duration: 0.5, delay: 1 },
+              scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+              boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+            },
+            onClick: handleNeuralLink,
+            className: "mt-8 w-full py-4 border-2 border-cyan-500 bg-cyan-500/10 hover:bg-cyan-500/30 text-cyan-400 font-bold text-lg tracking-widest rounded transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.8)] hover:scale-105 cursor-pointer"
+          },
+            h('span', { className: "inline-block" }, '[ INITIATE NEURAL LINK ]')
           )
         )
       )
