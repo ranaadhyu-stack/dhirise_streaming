@@ -29,4 +29,12 @@ app.get('/room', (c) => {
   )
 })
 
+app.get('/uplink', (c) => {
+  return c.render(
+    <div id="root">
+      <script type="module" src="/static/uplink.js?v=1"></script>
+    </div>
+  )
+})
+
 export default app
